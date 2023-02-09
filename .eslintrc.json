@@ -1,22 +1,81 @@
 {
+  "extends": [
+    "mantine",
+    "plugin:@next/next/recommended",
+    "plugin:jest/recommended",
+    "plugin:storybook/recommended",
+    "prettier",
+    "plugin:jest-dom/recommended",
+    "plugin:security/recommended"
+  ],
+  "plugins": ["testing-library", "jest", "react-hooks", "prefer-arrow", "jest-dom", "custom-rules", "mongoidcompare"],
   "overrides": [
     {
-      "extends": [
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
-      ],
-      "files": ["*.ts", "*.tsx"],
-      "parserOptions": {
-        "project": "tsconfig.json"
+      "files": ["**/?(*.)+(spec|test).[jt]s?(x)"],
+      "extends": ["plugin:testing-library/react"]
+    },
+    {
+      "files": ["script/**"],
+      "rules": {
+        "no-console": "off",
+        "security/detect-non-literal-fs-filename": "off"
       }
     }
   ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "__dirname"
   },
-  "plugins": ["@typescript-eslint"],
-  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   "rules": {
-    "@typescript-eslint/consistent-type-imports": "warn"
+    "@typescript-eslint/consistent-type-imports": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-key": "error",
+    "arrow-body-style": "off",
+    "custom-rules/prefer-one-objectid": "error",
+    "@typescript-eslint/no-unnecessary-condition": "error",
+    "no-console": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_+",
+        "varsIgnorePattern": "^_+",
+        "caughtErrorsIgnorePattern": "^_+"
+
+      }
+    ],
+    "prefer-arrow/prefer-arrow-functions": [
+      "error",
+      {
+        "disallowPrototype": true,
+        "singleReturnOnly": false,
+        "classPropertiesAllowed": false
+      }
+    ],
+    "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }],
+    "func-style": ["error", "expression", { "allowArrowFunctions": true }],
+
+    "react-hooks/exhaustive-deps": "error",
+    "react-hooks/rules-of-hooks": "error",
+
+    "consistent-return": "off",
+
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "error",
+
+    "require-await": "off",
+    "@typescript-eslint/require-await": "error",
+
+    "react/jsx-no-useless-fragment": ["error", { "allowExpressions": true }],
+
+    "@typescript-eslint/no-non-null-assertion": "error",
+
+    "@typescript-eslint/no-explicit-any": "error",
+
+    "security/detect-object-injection": "off",
+
+    "@typescript-eslint/switch-exhaustiveness-check": "error",
+
+    "mongoidcompare/no-triple-equality-check": "error"
   }
 }
